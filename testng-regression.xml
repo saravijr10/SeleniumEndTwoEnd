@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="RegressionSuite" parallel="methods" thread-count="2">
+    <test name="RegressionTests">
+        <groups>
+            <run>
+                <include name="regression"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="tests.LoginTwoTest"/>
+        </classes>
+    </test>
+
+
+</suite>

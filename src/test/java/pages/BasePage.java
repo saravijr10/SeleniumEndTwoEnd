@@ -15,9 +15,10 @@ public class BasePage {
     }
 
     protected void click(By locator) {
-        WaitUtils.waitForElementVisible(getDriver(), locator);
-        getDriver().findElement(locator).click();
+        WaitUtils.waitForElementClickable(getDriver(), locator).click();
+
     }
+
 
     protected void type(By locator, String text) {
         WaitUtils.waitForElementVisible(getDriver(), locator);

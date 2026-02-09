@@ -3,6 +3,7 @@ package base;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import utils.ConfigReader;
 
 public class DriverFactory {
@@ -16,8 +17,19 @@ public class DriverFactory {
 
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
-            WebDriver webDriver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+
+            // CI headless execution
+            if (System.getProperty("headless") != null) {
+                options.addArguments("--headless=new");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--window-size=1920,1080");
+            }
+
+            WebDriver webDriver = new ChromeDriver(options);
             driver.set(webDriver);
+
             System.out.println("Driver set in ThreadLocal");
         }
         System.out.println("Driver from ThreadLocal: " + driver.get());
